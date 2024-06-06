@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-
+const URL = "https://api.spoonacular.com/recipes/complexSearch";
+const API_KEY = "313106a8867f484bae38e6f4fe77cfeb";
 export default function Search() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("pizza");
+
   useEffect(() => {
-    function demo() {
-      console.log("Demo Function Executed");
+    async function fetchFood() {
+      const res = await fetch(`${URL}?query=${query}&apiKey=${API_KEY}`);
+      const data = await res.json();
+      console.log(data.results);
     }
-    demo();
+    fetchFood();
   }, [query]);
   return (
     <div>
